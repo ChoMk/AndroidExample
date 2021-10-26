@@ -1,19 +1,37 @@
 package com.example.androidexample
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+    private var numRendered = 0
+
+    private lateinit var resultText: TextView
+    private lateinit var plusButton: Button
+    private lateinit var minusButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        findViewById<TextView>(R.id.sample_text_view).setOnClickListener {
-            Toast.makeText(this, "text click", Toast.LENGTH_SHORT).show()
-        }
-        findViewById<TextView>(R.id.sample_button_view).setOnClickListener {
-            Toast.makeText(this, "button click", Toast.LENGTH_SHORT).show()
-        }
+        initView()
     }
+
+    private fun initView() {
+        resultText = findViewById(R.id.result)
+        plusButton = findViewById(R.id.plus_button)
+        minusButton = findViewById(R.id.minus_button)
+
+        plusButton.setOnClickListener {
+            numRendered++
+            resultText.text = numRendered.toString()
+        }
+        minusButton.setOnClickListener {
+            numRendered--
+            resultText.text = numRendered.toString()
+        }
+
+    }
+
 }
